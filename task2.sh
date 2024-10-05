@@ -1,16 +1,15 @@
-#part 1 
-grep -l "sample" file* | xargs -I {} sh -c 'count=$(grep -o "CSC510" "{}" | wc -l); [ "$count" -ge 3 ] && echo "{}"'
+#!/bin/bash
 
+cd ./hw4/dataset1
 
-#part 2
-grep -l "sample" file* | xargs -I {} sh -c 'count=$(grep -o "CSC510" "{}" | wc -l); if [ "$count" -ge 3 ]; then size=$(wc -c < "{}"); echo "{} $count $size"; fi' | gawk '{print $1, $2, $3}' | sort -k2,2nr -k3,3nr | awk '{print $1}'
+# Task 2 a
+# grep -l "sample" * | xargs -I {} sh -c 'count=$(grep -o "CSC510" "{}" | wc -w); [ "$count" -ge 3 ] && echo "{}" $count '
 
+# Task 2 b
+# sort -k2,2nr | gawk '{print $1}'
 
-#Part3
-grep -l "sample" file* | xargs -I {} sh -c 'count=$(grep -o "CSC510" "{}" | wc -l); if [ "$count" -ge 3 ]; then size=$(wc -c < "{}"); echo "$(echo "{}" | sed "s/file_/filtered_/") $count $size"; fi' | gawk '{print $1, $2, $3}' | sort -k2,2nr -k3,3nr | awk '{print $1}'
+# Task 2 c
+# sed 's/file_/filtered_/g'
 
-
-#Extra command to verify if the sorting of files is correct
-grep -l "sample" file* | xargs -I {} sh -c 'count=$(grep -o "CSC510" "{}" | wc -l); if [ "$count" -ge 3 ]; then size=$(wc -c < "{}"); echo "$(echo "{}" | sed "s/file_/filtered_/") $count $size"; fi' | gawk '{print $1, $2, $3}' | sort -k2,2nr -k3,3nr | awk '{print $1, $2}'
-
-
+# Output: a | b | c
+grep -l "sample" * | xargs -I {} sh -c 'count=$(grep -o "CSC510" "{}" | wc -w); [ "$count" -ge 3 ] && echo "{}" $count ' | sort -k2,2nr | gawk '{print $1}' | sed 's/file_/filtered_/g'
