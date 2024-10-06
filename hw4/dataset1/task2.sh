@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd ./hw4/dataset1
-
 # Task 2 a
 # grep -l "sample" * | xargs -I {} sh -c 'count=$(grep -o "CSC510" "{}" | wc -w); [ "$count" -ge 3 ] && echo "{}" $count '
 
